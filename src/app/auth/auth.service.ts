@@ -18,4 +18,8 @@ export class AuthService {
   signUp(user: User) {
     return this.http.post(this.authUrl, JSON.stringify({user: user}), {headers: this.headers});
   }
+
+  signIn() {
+    // Http request to create new user session and store auth token. 
+  }
 }
