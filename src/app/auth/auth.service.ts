@@ -19,7 +19,14 @@ export class AuthService {
     return this.http.post(this.authUrl, JSON.stringify({user: user}), {headers: this.headers});
   }
 
-  signIn() {
-    // Http request to create new user session and store auth token. 
+  signIn(email: string, password: string) {
+    return this.http.post(`${this.authUrl}//sign_in`, JSON.stringify({ user: { email: email, password: password }}), {headers: this.headers})
+      .map((response: Response) => {
+        let user = response.json();
+        if (user && user.token) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+        return user;
+      });
   }
 }

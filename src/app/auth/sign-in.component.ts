@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
 import { User } from './user';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,13 +13,19 @@ import { User } from './user';
 })
 
 export class SignInComponent {
+  model: any = {};
 
   constructor(
     private authService: AuthService,
     private router: Router) { }
 
   onSubmit() {
-    // Call sign in function in auth service
+    this.authService.signIn(this.model.email, this.model.password)
+      .subscribe(
+        data => {
+          this.router.navigate(['']);
+        }
+      )
   }
 
 }

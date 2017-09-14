@@ -22,7 +22,7 @@ export class SignUpComponent {
     this.authService.signUp(this.model)
       .subscribe(
         data => {
-          this.router.navigate(['']);
+          this.router.navigate(['sign-in']);
         }
       )
   }
