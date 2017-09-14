@@ -8,8 +8,7 @@ import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  templateUrl: './sign-in.component.html'
 })
 
 export class SignInComponent {
