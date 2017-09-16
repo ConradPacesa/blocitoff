@@ -6,10 +6,12 @@ import { HttpModule } from '@angular/http';
 import { AuthService } from './auth.service';
 
 import { SignUpComponent } from './sign-up.component';
+import { SignInComponent } from './sign-in.component';
 
 @NgModule({
   declarations: [
-    SignUpComponent
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     CommonModule,

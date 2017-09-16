@@ -2,7 +2,8 @@
   <div class="nav-wrapper container">
     <a id="logo-container" href="#" class="brand-logo">Blocitoff</a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="#">Login</a></li>
+      <li><a *ngIf="!isAuthenticated()" routerLink="sign-in">Login</a></li>
+      <li><a *ngIf="isAuthenticated()" routerLink="sign-in">Logout</a></li>
     </ul>
 
     <ul id="nav-mobile" class="side-nav">

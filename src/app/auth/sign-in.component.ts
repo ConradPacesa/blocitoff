@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from './auth.service';
+
+import { User } from './user';
+import 'rxjs/add/operator/map';
+
+@Component({
+  selector: 'app-sign-in',
+  templateUrl: './sign-in.component.html'
+})
+
+export class SignInComponent implements OnInit {
+  model: any = {};
+
+  constructor(
+    private authService: AuthService,
+    private router: Router) { }
+
+  ngOnInit() {
+    this.authService.signOut();
+  }
+
+  onSubmit() {
+    this.authService.signIn(this.model.email, this.model.password)
+      .subscribe(
+        data => {
+          this.router.navigate(['']);
+        }
+      )
+  }
+
+}

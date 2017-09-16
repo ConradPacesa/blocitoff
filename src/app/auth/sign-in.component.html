@@ -1,0 +1,32 @@
+<div class="container">
+  <h2 class="header teal-text text-lighten-2">Sign In</h2>
+  <div class="row">
+    <form class="col s12" (ngSubmit)="onSubmit()" #signUpForm="ngForm">
+      <div class="row">
+        <div class="input-field col s6">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="model.email"
+            name="email"
+            #email="ngModel"
+            required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            [(ngModel)]="model.password"
+            name="password"
+            #password="ngModel"
+            required>
+        </div>
+      </div>
+      <button type="submit" class="btn-large waves-effect waves-light teal lighten-1">Sign In</button>
+    </form>
+  </div>
+</div>

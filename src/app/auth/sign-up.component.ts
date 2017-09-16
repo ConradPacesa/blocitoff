@@ -7,8 +7,7 @@ import { User } from './user';
 
 @Component({
   selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  templateUrl: './sign-up.component.html'
 })
 
 export class SignUpComponent {
@@ -22,7 +21,7 @@ export class SignUpComponent {
     this.authService.signUp(this.model)
       .subscribe(
         data => {
-          this.router.navigate(['']);
+          this.router.navigate(['sign-in']);
         }
       )
   }
