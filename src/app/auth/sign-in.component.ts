@@ -18,15 +18,15 @@ export class SignInComponent implements OnInit {
     private authService: AuthService,
     private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authService.signOut();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.authService.signIn(this.model.email, this.model.password)
       .subscribe(
         data => {
-          this.router.navigate(['']);
+          this.router.navigate(['items']);
         }
       )
   }
