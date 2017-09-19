@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
 
 import { AuthModule } from './auth/auth.module';
+import { ItemModule } from './items/item.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AuthModule } from './auth/auth.module';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    ItemModule
   ],
   providers: [],
   bootstrap: [AppComponent]

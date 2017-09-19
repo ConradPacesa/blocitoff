@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Items To Do</h2>
+  <h5 class="text-lighten-2">Complete the items by their due date or they will disapper forever!</h5>
+  <br />
+  <div class="collection">
+    <div class="collectionr">
+      <a *ngFor="let item of items" class="collection-item">
+        <div>{{item.name}}<div class="secondary-content">{{item.expires_at | date: 'mediumDate'}}</div></div>
+      </a>
+    </div>
+  </div>
+</div>
