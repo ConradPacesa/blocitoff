@@ -25,6 +25,14 @@ export class ItemListComponent implements OnInit {
       .then(items => this.items = items);
   }
 
+  completeItem(item: Item): void {
+    this.itemService
+      .delete(item.id)
+      .then(() => {
+        this.items = this.items.filter(i => i !== item);
+      });
+  }
+
   ngOnInit(): void {
     this.getItems();
   }
