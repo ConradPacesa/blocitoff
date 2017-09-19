@@ -25,9 +25,18 @@ export class ItemService {
       .catch(this.handleError);
   }
 
+  delete(id: number): Promise<void> {
+    this.headers.set('X-User-Email', this.currentUser.email);
+    this.headers.set('X-User-Token', this.currentUser.authentication_token);
+    return this.http.delete(`${this.authUrl}//${this.currentUser.id}//items//${id}`, {headers: this.headers})
+      .toPromise()
+      .then(() => null)
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('an error occurred', error);
     return Promise.reject(error.message || error);
   }
-  
+
 }
