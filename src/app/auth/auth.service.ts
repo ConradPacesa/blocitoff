@@ -19,15 +19,16 @@ export class AuthService {
     return this.http.post(this.authUrl, JSON.stringify({user: user}), {headers: this.headers});
   }
 
-  signIn(email: string, password: string) {
+  signIn(email: string, password: string): Promise<any> {
     return this.http.post(`${this.authUrl}//sign_in`, JSON.stringify({ user: { email: email, password: password }}), {headers: this.headers})
-      .map((response: Response) => {
-        let user = response.json();
-        if (user && user.authentication_token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-        }
-        return user;
-      });
+    .toPromise()
+    .then((response: Response) => {
+      let user = response.json();
+      if (user && user.authentication_token) {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+      }
+      return user;
+    });
   }
 
   signOut() {

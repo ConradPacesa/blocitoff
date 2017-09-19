@@ -24,11 +24,10 @@ export class SignInComponent implements OnInit {
 
   onSubmit(): void {
     this.authService.signIn(this.model.email, this.model.password)
-      .subscribe(
+      .then(
         data => {
           this.router.navigate(['items']);
-        }
-      )
+        })
   }
 
 }
