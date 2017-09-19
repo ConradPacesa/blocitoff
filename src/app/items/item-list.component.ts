@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import { ItemService } from './item.service';
 import { Item } from './item';
@@ -22,7 +23,6 @@ export class ItemListComponent implements OnInit {
   getItems(): void {
     this.itemService.getItems()
       .then(items => this.items = items);
-    console.log(this.items);
   }
 
   ngOnInit(): void {

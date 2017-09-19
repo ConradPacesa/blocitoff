@@ -17,19 +17,17 @@ export class ItemService {
   constructor(private http: Http) { }
 
   getItems(): Promise<Item[]> {
-    console.log(this.currentUser);
     this.headers.set('X-User-Email', this.currentUser.email);
     this.headers.set('X-User-Token', this.currentUser.authentication_token);
-    console.log(this.headers);
     return this.http.get(`${this.authUrl}//${this.currentUser.id}//items`, {headers: this.headers})
-    .toPromise()
-    .then(response => response.json().data as Item[])
-    .catch(this.handleError);
+      .toPromise()
+      .then(response => response.json() as Item[])
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
     console.error('an error occurred', error);
     return Promise.reject(error.message || error);
   }
-
+  
 }

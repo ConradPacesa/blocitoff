@@ -31,12 +31,12 @@ export class AuthService {
   }
 
   signOut() {
-    // let user = JSON.parse(localStorage.getItem('currentUser'));
-    // this.headers.append('X-User-Token', user.authentication_token);
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    this.headers.set('X-User-Token', user.authentication_token);
     localStorage.removeItem('currentUser');
-    // return this.http.delete(`${this.authUrl}//users//sign_out`, {headers: this.headers})
-    //   .subscribe((res) => {
-    //   });
+    return this.http.delete(`${this.authUrl}//sign_out`, {headers: this.headers})
+      .subscribe((res) => {
+    });
   }
 
   isAuthenticated(): boolean {
