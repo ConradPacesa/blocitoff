@@ -2,9 +2,8 @@
   <h2>Items To Do</h2>
   <h5 class="text-lighten-2">Complete the items by their due date or they will disappear forever!</h5>
   <br />
-  <div class="collection">
-    <div class="collectionr">
-      <a *ngFor="let item of items" class="collection-item">
+    <div class="collection">
+      <a *ngFor="let item of items | incompleted" class="collection-item">
         <div>{{item.name}}<span class="badge">{{item.expires_at | date: 'mediumDate'}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="checkbox" (click)="completeItem(item)" class="filled-in" id="filled-in-box"/>
             <label for="filled-in-box">Complete</label>
@@ -12,5 +11,4 @@
         </div>
       </a>
     </div>
-  </div>
 </div>

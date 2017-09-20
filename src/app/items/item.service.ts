@@ -25,12 +25,12 @@ export class ItemService {
       .catch(this.handleError);
   }
 
-  delete(id: number): Promise<void> {
+  update(item: Item): Promise<Item> {
     this.headers.set('X-User-Email', this.currentUser.email);
     this.headers.set('X-User-Token', this.currentUser.authentication_token);
-    return this.http.delete(`${this.authUrl}//${this.currentUser.id}//items//${id}`, {headers: this.headers})
+    return this.http.put(`${this.authUrl}//${this.currentUser.id}//items//${item.id}`, JSON.stringify({item: { completed: true }}), {headers: this.headers})
       .toPromise()
-      .then(() => null)
+      .then((response: Response) => response.json() as Item)
       .catch(this.handleError);
   }
 

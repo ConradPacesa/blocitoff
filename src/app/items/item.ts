@@ -3,6 +3,7 @@ export class Item {
     public id: number,
     public name: string,
     public expires_at: string,
+    public completed: boolean,
     public user: object
   ) { }
 

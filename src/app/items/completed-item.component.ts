@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
 
 import { ItemService } from './item.service';
 import { Item } from './item';
@@ -8,11 +7,11 @@ import { Item } from './item';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
-  selector: 'app-item-list',
-  templateUrl: './item-list.component.html'
+  selector: 'app-completed-item',
+  templateUrl: './completed-item.component.html'
 })
 
-export class ItemListComponent implements OnInit {
+export class CompletedItemComponent implements OnInit {
 
   items: Item[];
 
@@ -23,14 +22,6 @@ export class ItemListComponent implements OnInit {
   getItems(): void {
     this.itemService.getItems()
       .then(items => this.items = items);
-  }
-
-  completeItem(item: Item): void {
-    this.itemService
-      .update(item)
-      .then(() => {
-        this.items = this.items.filter(i => i !== item);
-      });
   }
 
   ngOnInit(): void {

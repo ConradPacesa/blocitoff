@@ -7,10 +7,17 @@ import { AuthService } from '../auth/auth.service';
 import { ItemService } from './item.service';
 
 import { ItemListComponent } from './item-list.component';
+import { CompletedItemComponent } from './completed-item.component';
+
+import { CompletedPipe } from './completed.pipe';
+import { IncompletedPipe } from './incompleted.pipe';
 
 @NgModule({
   declarations: [
-    ItemListComponent
+    ItemListComponent,
+    CompletedItemComponent,
+    CompletedPipe,
+    IncompletedPipe
   ],
   imports: [
     CommonModule,
