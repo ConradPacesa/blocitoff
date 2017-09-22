@@ -11,7 +11,7 @@ export class AuthService {
 
   private headers = new Headers({'Content-Type' : 'application/json'});
 
-  private authUrl = 'http://192.168.99.100:3000//users';  // URL to web api
+  private authUrl = 'https://blocitoffapi.herokuapp.com//users';  // URL to web api
 
   constructor(private http: Http) { }
 
