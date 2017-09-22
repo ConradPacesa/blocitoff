@@ -45,6 +45,22 @@ export class ItemListComponent implements OnInit {
       });
   }
 
+  countIncompleteItems(): number {
+    let count: number = 0;
+    let items: Item[] = this.items;
+    for (let i: number = 0; i < items.length; i ++) {
+      if (!items[i].completed) {
+        count++
+      }
+    }
+    return count;
+  }
+
+  anyItems(): boolean {
+    let count: number = this.countIncompleteItems();
+    return count > 0;
+  }
+
   ngOnInit(): void {
     this.getItems();
   }

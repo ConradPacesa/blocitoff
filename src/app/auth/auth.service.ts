@@ -23,11 +23,11 @@ export class AuthService {
     return this.http.post(`${this.authUrl}//sign_in`, JSON.stringify({ user: { email: email, password: password }}), {headers: this.headers})
     .toPromise()
     .then((response: Response) => {
-      let user = response.json();
-      if (user && user.authentication_token) {
-        localStorage.setItem('currentUser', JSON.stringify(user));
-      }
-      return user;
+        let user = response.json();
+        if (user && user.authentication_token) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+        return user;
     });
   }
 

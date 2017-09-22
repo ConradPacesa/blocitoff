@@ -1,6 +1,7 @@
 <div class="container">
   <h2>Items To Do</h2>
-  <h5 class="text-lighten-2">Complete the items by their due date or they will disappear forever!</h5>
+  <h5 *ngIf="anyItems()" class="text-lighten-2">Complete the items by their due date or they will disappear forever!</h5>
+  <h5 *ngIf="!anyItems()" class="text-lighten-2">It looks like you don't have any items to do. Better add some to get started.</h5>
   <br />
   <div class="row">
     <form class="col s12">

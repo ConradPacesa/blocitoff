@@ -4,7 +4,6 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Item } from './item';
-import { User } from '../auth/user';
 
 @Injectable()
 export class ItemService {
@@ -16,8 +15,8 @@ export class ItemService {
   constructor(private http: Http) { }
 
   getItems(): Promise<Item[]> {
-    let headers = this.getHeaders();
-    let currentUser = this.getCurrentUser();
+    let headers: Headers = this.getHeaders();
+    let currentUser: any = this.getCurrentUser();
     return this.http.get(`${this.authUrl}//${currentUser.id}//items`, {headers: headers})
       .toPromise()
       .then(response => response.json() as Item[])
@@ -25,7 +24,7 @@ export class ItemService {
   }
 
   create(name: String): Promise<Item> {
-    let currentUser = this.getCurrentUser();
+    let currentUser: any = this.getCurrentUser();
     return this.http.post(`${this.authUrl}//${currentUser.id}//items`, JSON.stringify({item: {name: name, user_id: currentUser.id}}), {headers: this.headers})
       .toPromise()
       .then((response: Response) => response.json() as Item)
@@ -33,8 +32,8 @@ export class ItemService {
   }
 
   update(item: Item): Promise<Item> {
-    let headers = this.getHeaders();
-    let currentUser = this.getCurrentUser();
+    let headers: Headers = this.getHeaders();
+    let currentUser: any = this.getCurrentUser();
     return this.http.put(`${this.authUrl}//${currentUser.id}//items//${item.id}`, JSON.stringify({item: { completed: true }}), {headers: headers})
       .toPromise()
       .then((response: Response) => response.json() as Item)
@@ -46,12 +45,11 @@ export class ItemService {
   }
 
   private getHeaders(): Headers {
-    let currentUser = this.getCurrentUser();
+    let currentUser: any = this.getCurrentUser();
     this.headers.set('X-User-Email', currentUser.email);
     this.headers.set('X-User-Token', currentUser.authentication_token);
     return this.headers;
   }
-
 
   private handleError(error: any): Promise<any> {
     console.error('an error occurred', error);
