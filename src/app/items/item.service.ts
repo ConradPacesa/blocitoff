@@ -8,30 +8,47 @@ import { Item } from './item';
 @Injectable()
 export class ItemService {
 
-  private authUrl = 'http://192.168.99.100:3000//users';  // URL to web api
-
-  private currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  private authUrl = 'https://blocitoffapi.herokuapp.com//users';  // URL to web api
 
   private headers = new Headers({'Content-Type' : 'application/json'});
 
   constructor(private http: Http) { }
 
   getItems(): Promise<Item[]> {
-    this.headers.set('X-User-Email', this.currentUser.email);
-    this.headers.set('X-User-Token', this.currentUser.authentication_token);
-    return this.http.get(`${this.authUrl}//${this.currentUser.id}//items`, {headers: this.headers})
+    let headers: Headers = this.getHeaders();
+    let currentUser: any = this.getCurrentUser();
+    return this.http.get(`${this.authUrl}//${currentUser.id}//items`, {headers: headers})
       .toPromise()
       .then(response => response.json() as Item[])
       .catch(this.handleError);
   }
 
-  update(item: Item): Promise<Item> {
-    this.headers.set('X-User-Email', this.currentUser.email);
-    this.headers.set('X-User-Token', this.currentUser.authentication_token);
-    return this.http.put(`${this.authUrl}//${this.currentUser.id}//items//${item.id}`, JSON.stringify({item: { completed: true }}), {headers: this.headers})
+  create(name: String): Promise<Item> {
+    let currentUser: any = this.getCurrentUser();
+    return this.http.post(`${this.authUrl}//${currentUser.id}//items`, JSON.stringify({item: {name: name, user_id: currentUser.id}}), {headers: this.headers})
       .toPromise()
       .then((response: Response) => response.json() as Item)
       .catch(this.handleError);
+  }
+
+  update(item: Item): Promise<Item> {
+    let headers: Headers = this.getHeaders();
+    let currentUser: any = this.getCurrentUser();
+    return this.http.put(`${this.authUrl}//${currentUser.id}//items//${item.id}`, JSON.stringify({item: { completed: true }}), {headers: headers})
+      .toPromise()
+      .then((response: Response) => response.json() as Item)
+      .catch(this.handleError);
+  }
+
+  private getCurrentUser(): any {
+    return JSON.parse(localStorage.currentUser);
+  }
+
+  private getHeaders(): Headers {
+    let currentUser: any = this.getCurrentUser();
+    this.headers.set('X-User-Email', currentUser.email);
+    this.headers.set('X-User-Token', currentUser.authentication_token);
+    return this.headers;
   }
 
   private handleError(error: any): Promise<any> {

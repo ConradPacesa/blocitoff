@@ -2,9 +2,9 @@
   <h2>Completed Items</h2>
   <h5 class="text-lighten-2">Here is everything you have completed so far, keep up the good work!</h5>
   <br />
-    <div class="collection">
-      <a *ngFor="let item of items | completed" class="collection-item">
-        <div>{{item.name}}</div>
-      </a>
-    </div>
+  <table class="bordered">
+    <tr *ngFor="let item of items | completed" class="collection-item">
+      <td><h5 class="completed-items">{{item.name}}</h5></td>
+    </tr>
+  </table>
 </div>
