@@ -6,6 +6,8 @@ import { AuthService } from './auth.service';
 import { User } from './user';
 import 'rxjs/add/operator/map';
 
+declare var toastr: any;
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html'
@@ -27,7 +29,10 @@ export class SignInComponent implements OnInit {
       .then(
         data => {
           this.router.navigate(['items']);
-        })
+        },
+        error => {
+          console.log(error);
+          toastr.warning('Incorrect username/password.');
+        });
   }
-
 }

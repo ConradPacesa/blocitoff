@@ -5,6 +5,8 @@ import { AuthService } from './auth.service';
 
 import { User } from './user';
 
+declare var toastr: any;
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html'
@@ -17,12 +19,15 @@ export class SignUpComponent {
     private authService: AuthService,
     private router: Router) { }
 
-  onSubmit() {
+  onSubmit(): void {
     this.authService.signUp(this.model)
-      .subscribe(
+      .then(
         data => {
           this.router.navigate(['sign-in']);
-        }
-      )
+        },
+        error => {
+          console.log(error);
+          toastr.warning('Please fill all fields');
+        });
   }
 }

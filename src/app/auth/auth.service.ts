@@ -15,8 +15,16 @@ export class AuthService {
 
   constructor(private http: Http) { }
 
-  signUp(user: User) {
-    return this.http.post(this.authUrl, JSON.stringify({user: user}), {headers: this.headers});
+  signUp(user: User): Promise<any> {
+    return this.http.post(this.authUrl, JSON.stringify({user: user}), {headers: this.headers})
+      .toPromise()
+      .then((response: Response) => {
+        if (response.status < 200 || response.status >= 300) {
+          throw new Error('This request has failed' + response.status);
+        } else {
+          return response;
+        }
+      });
   }
 
   signIn(email: string, password: string): Promise<any> {
@@ -26,8 +34,11 @@ export class AuthService {
         let user = response.json();
         if (user && user.authentication_token) {
           localStorage.setItem('currentUser', JSON.stringify(user));
+          return user;
+        } else {
+          throw new Error('This request has failed' + response.status);
         }
-        return user;
+
     });
   }
 
