@@ -20,14 +20,18 @@ export class SignUpComponent {
     private router: Router) { }
 
   onSubmit(): void {
-    this.authService.signUp(this.model)
-      .then(
-        data => {
-          this.router.navigate(['sign-in']);
-        },
-        error => {
-          console.log(error);
-          toastr.warning('Please fill all fields');
-        });
+    if (this.model.password === this.model.confirmPassword) {
+      this.authService.signUp(this.model)
+        .then(
+          data => {
+            this.router.navigate(['sign-in']);
+          },
+          error => {
+            console.log(error);
+            toastr.warning('Please fill all fields');
+          });
+    } else {
+      toastr.warning('The passwords do not match')
+    }
   }
 }
