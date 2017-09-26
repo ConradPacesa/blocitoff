@@ -38,6 +38,18 @@
             required>
         </div>
       </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <label for="password">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            [(ngModel)]="model.confirmPassword"
+            name="confirmPassword"
+            #confirmPassword="ngModel"
+            required>
+        </div>
+      </div>
       <button type="submit" class="btn-large waves-effect waves-light teal lighten-1">Sign Up</button>
     </form>
   </div>
